@@ -1,0 +1,42 @@
+{
+	"name": "vehicleparquetdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "out datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-00000-2a1dc94b-2eea-4d96-9cf1-6fab822bcdf1-c000.snappy.parquet",
+				"fileSystem": "vehicledata"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": [
+			{
+				"name": "VehicleType",
+				"type": "UTF8"
+			},
+			{
+				"name": "LicensePlate",
+				"type": "UTF8"
+			},
+			{
+				"name": "ns:KoeretoejMaerkeTypeNavn",
+				"type": "UTF8"
+			},
+			{
+				"name": "ns:KoeretoejModelTypeNavn",
+				"type": "UTF8"
+			},
+			{
+				"name": "ns:KoeretoejOplysningFoersteRegistreringDato",
+				"type": "DATE"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

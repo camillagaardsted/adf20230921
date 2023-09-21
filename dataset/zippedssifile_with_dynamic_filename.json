@@ -1,0 +1,22 @@
+{
+	"name": "zippedssifile_with_dynamic_filename",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ssi_website",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"zipfilename": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

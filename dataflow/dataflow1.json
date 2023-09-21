@@ -1,0 +1,64 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "vehicleparquetdata",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "vehicledatajson",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          VehicleType as string,",
+				"          LicensePlate as string,",
+				"          {ns:KoeretoejMaerkeTypeNavn} as string,",
+				"          {ns:KoeretoejModelTypeNavn} as string,",
+				"          {ns:KoeretoejOplysningFoersteRegistreringDato} as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false,",
+				"     format: 'parquet') ~> source1",
+				"source1 select(mapColumn(",
+				"          VehicleType,",
+				"          LicensePlate,",
+				"          Manufacturer = {ns:KoeretoejMaerkeTypeNavn},",
+				"          Model = {ns:KoeretoejModelTypeNavn},",
+				"          RegistrationDate = {ns:KoeretoejOplysningFoersteRegistreringDato}",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(Manufacturer=='MERCEDES BENZ') ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

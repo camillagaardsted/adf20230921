@@ -1,0 +1,19 @@
+{
+	"name": "unzippedssifiles",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "out datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "covid19",
+				"fileSystem": "datalakecontainer"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

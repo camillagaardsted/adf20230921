@@ -1,0 +1,20 @@
+{
+	"name": "powerquery1",
+	"properties": {
+		"type": "WranglingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"name": "vehicleparquetdata",
+					"script": "source(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false,\n\tformat: 'parquet') ~> vehicleparquetdata",
+					"dataset": {
+						"referenceName": "vehicleparquetdata",
+						"type": "DatasetReference"
+					}
+				}
+			],
+			"script": "section Section1;\r\nshared vehicleparquetdata = let AdfDoc = AzureStorage.DataLakeContents(\"https://datalakesu20230921.dfs.core.windows.net/vehicledata/part-00000-2a1dc94b-2eea-4d96-9cf1-6fab822bcdf1-c000.snappy.parquet\"), Parquet = Parquet.Document(AdfDoc) in Parquet;\r\nshared UserQuery = let Source = #\"vehicleparquetdata\",\r\n  #\"Removed columns\" = Table.RemoveColumns(Source, {\"ns:KoeretoejModelTypeNavn\"}) in #\"Removed columns\";\r\n",
+			"documentLocale": "en-us"
+		}
+	}
+}

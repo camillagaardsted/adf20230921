@@ -1,0 +1,21 @@
+{
+	"name": "zippedssifile",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ssi_website",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "overvaagningsdata-dashboard-covid19-20092023-c81e10dfaaca4cfa86d0ef0484a674fb"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
